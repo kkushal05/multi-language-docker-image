@@ -15,13 +15,14 @@ RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 RUN apk add build-base git
+RUN apk add -U curl bash ca-certificates openssl ncurses coreutils python2 make gcc g++ libgcc linux-headers grep util-linux binutils findutils
 
 #INSTALL JDK AND SDK VERSION MANAGER
 RUN curl -s "https://get.sdkman.io" | bash
 RUN bash "$HOME/.sdkman/bin/sdkman-init.sh"
 
 #INSTALL NODE VERSION MANAGER
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 RUN bash ~/.nvm/nvm.sh
 
 #INSTALL GO VERSION MANAGER
