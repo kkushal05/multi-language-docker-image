@@ -19,14 +19,16 @@ All the languages supported by the below tools have been installed inside this i
 Steps:
 
 1. Build docker image
-    docker build -t sdkman:1.0 -f Dockerfile .
-   If you are behind a company firewall, use the below command.
+
+   docker build -t sdkman:1.0 -f Dockerfile .
    
+   If you are behind a company firewall, use the below command.
    
     docker build --build-arg http_proxy=http://myproxy.example.com:3128  --build-arg https_proxy=http://myproxy.example.com:3128  -t sdkman:1.0 -f Dockerfile .
     
     
 2. Run the container using the built image using default versions for Java, Go, NodeJS, CFX
+
    docker run -it --name sdkman sdkman:1.0
    
    If you want to change the versions, then pass then as environment variables
