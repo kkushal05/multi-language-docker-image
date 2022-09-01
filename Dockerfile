@@ -28,7 +28,5 @@ RUN bash ~/.nvm/nvm.sh
 SHELL ["/bin/bash", "-c"]
 RUN bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) && source /root/.gvm/scripts/gvm 
 COPY entrypoint.sh /
-RUN ls -lrth / 
-RUN pwd
 RUN chmod 755 entrypoint.sh 
 ENTRYPOINT ["./entrypoint.sh"]
