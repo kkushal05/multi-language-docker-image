@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.14
 LABEL maintainer="kushal.kumar"
 
 # SET ENVIRONMENT VARIABLES
@@ -10,7 +10,8 @@ ENV CFX_VERSION_VAL="14.0.2-zulu"
 
 #INSTALL DEPENDENCIES
 RUN apk update
-RUN apk add -U build-base git wget zip unzip bison curl bash ca-certificates openssl ncurses coreutils make gcc g++ libgcc linux-headers grep util-linux binutils findutils
+RUN apk add -U build-base git wget zip unzip bison curl bash ca-certificates openssl ncurses coreutils make gcc g++ libgcc linux-headers \
+grep util-linux binutils findutils file patchelf
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
