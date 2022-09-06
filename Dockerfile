@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM jenkins/inbound-agent:latest
 LABEL maintainer="kushal.kumar"
 
 # SET ENVIRONMENT VARIABLES
@@ -9,11 +9,10 @@ ENV GO_VERSION_VAL="1.4"
 ENV CFX_VERSION_VAL="14.0.2-zulu"
 
 #INSTALL DEPENDENCIES
-RUN apk update
-RUN apk add -U build-base git wget zip unzip bison curl bash ca-certificates openssl ncurses coreutils make gcc g++ libgcc linux-headers \
+RUN apt-get update -y
+RUN apt-get install curl git make binutils bison gcc build-essential wget zip unzip ca-certificates openssl coreutils g++  \
 grep util-linux binutils findutils file patchelf
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
+RUN apt-get install  python3 python3-pip && ln -sf python3 /usr/bin/python
 RUN pip3 install --no-cache --upgrade pip setuptools
 
 #INSTALL JDK AND SDK VERSION MANAGER
@@ -28,5 +27,5 @@ RUN bash ~/.nvm/nvm.sh
 SHELL ["/bin/bash", "-c"]
 RUN bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) && source /root/.gvm/scripts/gvm 
 COPY entrypoint.sh /
-RUN chmod 755 entrypoint.sh 
+RUN chmod 755 /entrypoint.sh 
 ENTRYPOINT ["./entrypoint.sh"]
